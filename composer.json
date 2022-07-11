@@ -1,0 +1,17 @@
+{
+  "name": "atlantisgroupbv/ormmodel",
+  "homepage": "https://github.com/skooijman/ormmodel",
+  "description": "Custom orm with multiple drivers",
+  "keywords": ["DB2Model", "DB2ORM"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bas Kooijman",
+      "email": "bas.kooijman@gmail.com",
+      "role": "Creator / Main Developer"
+    }
+  ],
+  "require": {
+    "php": ">=8.1"
+  }
+}
