@@ -1,0 +1,87 @@
+#!/bin/bash
+
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+BROWN='\033[0;33m'
+NC='\033[0m' # No Color
+
+if [ -f /.dockerinit ] || [ -f /.dockerenv ] || [ -d /vagrant ] || [ -d /docker ]; then
+    DOCKER_PHP_PREFIX=''
+else
+    DOCKER_PHP_PREFIX='docker-compose run php '
+fi
+
+PROJECT=`$DOCKER_PHP_PREFIX php -r "echo dirname(dirname(dirname(realpath('$0'))));"`
+STAGED_FILES_CMD=`git diff --cached --name-only --diff-filter=ACMR HEAD | grep \\\\.php`
+
+BINDIR=`$DOCKER_PHP_PREFIX php -r "echo file_exists('vendor/autoload.php') ? './vendor/bin' : '../../bin';"`
+ROOTDIR=`$DOCKER_PHP_PREFIX php -r "echo getcwd();"`
+
+# Determine if a file list is passed with only .php files
+if [ "$#" -eq 1 ]
+then
+	oIFS=$IFS
+	IFS='
+	'
+	SFILES="$1"
+	IFS=$oIFS
+fi
+SFILES=${SFILES:-$STAGED_FILES_CMD}
+
+if [ "$SFILES" != "" ]
+then
+        echo -e "\n${GREEN}Checking PHP Lint...${NC}\n"
+        for FILE in $SFILES
+        do
+                $DOCKER_PHP_PREFIX php -l -d display_errors=0 $PROJECT/$FILE
+                if [ $? != 0 ]
+                then
+                        echo -e "\n${RED}Fix the error before commit.${NC}\n"
+                        exit 1
+                fi
+                FILES="$FILES $PROJECT/$FILE"
+        done
+
+        if [ "$FILES" != "" ]
+        then
+                echo -e "\n${GREEN}Running Code Sniffer...${NC}\n"
+                $DOCKER_PHP_PREFIX $BINDIR/phpcs --standard=./phpcs.xml --ignore=$ROOTDIR/vendor/,$ROOTDIR/test/ --encoding=utf-8 -n -p $FILES
+                if [ $? != 0 ]
+                then
+                        echo -e "\n${RED}Fix the error before commit.${NC}\n"
+                        exit 1
+                fi
+
+                echo -e "\n${GREEN}Running PHPUnit...${NC}\n"
+                $DOCKER_PHP_PREFIX php -dzend_extension=xdebug.so $BINDIR/phpunit
+                if [ $? != 0 ]
+                then
+                        echo -e "\n${RED}Fix the error before commit.${NC}\n"
+                        exit 1
+                fi
+        fi
+fi
+
+# Composer validate
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+	against=HEAD
+else
+	# Initial commit: diff against an empty tree object
+	against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+CHANGED=`git diff-index --name-status $against -- composer.json | wc -l`
+if [ $CHANGED -gt 0 ];
+then
+        echo -e "\n${GREEN}Validating composer...${NC}\n"
+	composer validate --no-check-all
+	isValid=$?
+	if [ $isValid -ne 0 ]
+	then
+        echo -e "\n${RED}Fix the error before commit.${NC}\n"
+		exit $isValid
+	fi
+fi
+
+exit $?
