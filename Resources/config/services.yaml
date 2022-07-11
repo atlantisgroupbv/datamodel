@@ -1,0 +1,10 @@
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
+
+    AtlantisGroupBV\OrmModel\:
+      resource: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/*'
+      exclude: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/Validator/*'
+
