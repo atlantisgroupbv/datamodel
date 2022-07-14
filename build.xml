@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="OrmModel" default="build" basedir=".">
+    <php expression="require file_exists('vendor/autoload.php') ? 'vendor/autoload.php' : '../../autoload.php"/>
+
+    <php expression="file_exists('vendor/autoload.php') ? './vendor/bin' : '../../bin'" returnProperty="binDir"/>
+    <php expression="getcwd()" returnProperty="rootDir"/>
+
+    <target name="build" depends="test"/>
+
+    <target name="build-ci" depends="test"/>
+
+    <target name="test" depends="phplint,phpcs-test,phpunit-coverage"/>
+
+    <target name="report" depends="phploc,phpcpd,phpcs,phpmd"/>
+
+    <target name="phplint" description="Perform syntax check of php sourcecode files">
+            <phplint haltonfailure="true" deprecatedAsError="true" cachefile="build/phplint/cache.txt">
+                <fileset dir="./">
+                    <include name="**/*.php"/>
+                    <include name="*.php"/>
+                    <exclude name="build/**"/>
+                    <exclude name="vendor/**"/>
+                </fileset>
+            </phplint>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit.">
+        <exec executable="php" passthru="true" checkreturn="true">
+            <arg value="-dzend_extension=xdebug.so"/>
+            <arg value="${binDir}/phpunit"/>
+            <arg value="--configuration=phpunit.xml"/>
+            <arg value="--colors=always"/>
+        </exec>
+    </target>
+
+    <target name="phpunit-coverage" description="Run unit tests with PHPUnit with code coverage summery.">
+        <exec executable="php" passthru="true" checkreturn="true">
+            <arg value="-dzend_extension=xdebug.so"/>
+            <arg value="${binDir}/phpunit"/>
+            <arg value="--configuration=phpunit-coverage.xml"/>
+            <arg value="--colors=never"/>
+        </exec>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <phploc countTests="true" reportType="cli">
+            <fileset dir="./">
+                <include name="**/*php"/>
+                <exclude name="build/**"/>
+                <exclude name="vendor/**"/>
+            </fileset>
+        </phploc>
+    </target>
+
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+        <phpdepend>
+            <fileset dir="./">
+                <include name="**/*.php" />
+                <exclude name="build/**" />
+                <exclude name="vendor/**" />
+                <exclude name="test/**" />
+            </fileset>
+            <logger type="jdepend-xml" outfile="build/pdepend/jdepend.xml"/>
+            <logger type="jdepend-chart" outfile="build/pdepend/dependencies.svg"/>
+            <logger type="overview-pyramid" outfile="build/pdepend/overview-pyramid.svg"/>
+        </phpdepend>
+    </target>
+
+    <target name="phpmd" description="Perform project mess detection using PHPMD">
+        <phpmd rulesets="codesize,unusedcode">
+            <fileset dir="./">
+                <include name="**/*.php" />
+                <exclude name="build/**" />
+                <exclude name="vendor/**" />
+                <exclude name="test/**" />
+            </fileset>
+        </phpmd>
+    </target>
+
+    <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer, summary report">
+        <exec executable="${binDir}/phpcs" passthru="true" checkreturn="true">
+            <arg value="--standard=./phpcs.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${rootDir}/vendor/*,${rootDir}/test/*" />
+            <arg value="--report=summary" />
+            <arg value="./" />
+        </exec>
+    </target>
+
+    <target name="phpcs-full" description="Find coding standard violations using PHP_CodeSniffer, full report">
+        <exec executable="${binDir}/phpcs" passthru="true" checkreturn="true">
+            <arg value="--standard=./phpcs.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${rootDir}/vendor/*,${rootDir}/test/*" />
+            <arg value="--report=summary" />
+            <arg value="--report=gitblame" />
+            <arg value="--report=full" />
+            <arg value="./" />
+        </exec>
+    </target>
+
+    <target name="phpcs-test" description="Find coding standard violations using PHP_CodeSniffer, summary report">
+        <echo message="${rootDir}" />
+        <exec executable="${binDir}/phpcs" passthru="true" checkreturn="true">
+            <arg value="--standard=./phpcs.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${rootDir}/vendor/*,${rootDir}/test/*" />
+            <arg value="--warning-severity=0" />
+            <arg value="--report=summary" />
+            <arg value="--report=gitblame" />
+            <arg value="--report=full" />
+            <arg value="./" />
+        </exec>
+    </target>
+
+    <target name="phpcbf">
+        <echo message="${rootDir}" />
+        <exec executable="${binDir}/phpcbf" passthru="true" checkreturn="true">
+            <arg value="--standard=./phpcs.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${rootDir}/vendor/,${rootDir}/test/" />
+            <arg value="./" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <phpcpd>
+            <fileset dir="./">
+                <include name="**/*.php" />
+                <exclude name="build/**" />
+                <exclude name="vendor/**" />
+                <exclude name="test/**" />
+            </fileset>
+        </phpcpd>
+    </target>
+</project>

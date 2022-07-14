@@ -12,9 +12,42 @@
     }
   ],
   "require": {
-    "php": ">=8.1"
+    "php": ">=8.1",
+    "symfony/validator": "~4.0",
+    "doctrine/annotations": "~1.0",
+    "doctrine/cache": "~1.0",
+    "symfony/intl": "~3.4|~4.0|~5.4",
+    "symfony/config": "~3.4|~4.0|~5.4",
+    "symfony/yaml": "~3.4|~4.0|~5.4"
+  },
+  "require-dev": {
+    "psr/log": "^1.0",
+    "psr/container": "^1.0",
+    "phpunit/phpunit": "*",
+    "squizlabs/php_codesniffer": "*",
+    "pdepend/pdepend": "*",
+    "phpmd/phpmd": "*",
+    "phploc/phploc": "*",
+    "sebstian/phpcpd": "*",
+    "phing/phing": "*"
   },
   "autoload": {
-    "psr-4": { "atlantisgroupbv\\ormmodel\\": ""}
+    "psr-4": {
+      "atlantisgroupbv\\ormmodel\\": "src/"
+    },
+    "psr-0": {
+      "Symfony\\Compoment\\Validator\\Constraints\\": "src/Validator/Constraints"
+    }
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "Test\\AtlantisGroupBV\\OrmModel\\": "test/src/"
+    },
+    "files": ["test/fixtures/classes.php"]
+  },
+  "bin": ["bin/ormmodel"],
+  "suggest": {
+    "rdlowrey/auryn": "Can be used to autowire the services, version ~1.4"
   }
 }
