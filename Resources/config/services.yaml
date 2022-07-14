@@ -8,6 +8,3 @@ services:
       resource: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/*'
       exclude: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/Validator/*'
 
-  AtlantisGroupBV\OrmModel\ConnectionFactoryInterface:
-    public: true
-    alias: AtlantisGroupBV\OrmModel\ConnectionFactory
