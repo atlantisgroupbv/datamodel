@@ -1,7 +1,7 @@
 {
-  "name": "atlantisgroupbv/ormmodel",
-  "homepage": "https://github.com/atlantisgroupbv/ormmodel",
-  "description": "Custom orm with multiple drivers, based on and for symfony",
+  "name": "atlantisgroupbv/datamodel",
+  "homepage": "https://github.com/atlantisgroupbv/datamodel",
+  "description": "Custom DataModel with multiple drivers, based on and for symfony",
   "keywords": ["DB2Model", "DB2ORM"],
   "license": "MIT",
   "authors": [
@@ -19,7 +19,7 @@
   },
   "autoload": {
     "psr-4": {
-      "AtlantisGroupBV\\OrmModel\\": "src/"
+      "AtlantisGroupBV\\DataModel\\": "src/"
     }
   }
 }

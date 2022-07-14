@@ -6,5 +6,10 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AtlantisGroupBV\\DataModel\\Entity\\EntityInterface' => $baseDir . '/src/Entity/EntityInterface.php',
+    'AtlantisGroupBV\\DataModel\\Exception\\General' => $baseDir . '/src/Exception/General.php',
+    'AtlantisGroupBV\\DataModel\\Service\\AbstractService' => $baseDir . '/src/Service/AbstractService.php',
+    'AtlantisGroupBV\\DataModel\\Service\\ServiceFactory' => $baseDir . '/src/Service/ServiceFactory.php',
+    'AtlantisGroupBV\\DataModel\\Service\\ServiceInterface' => $baseDir . '/src/Service/ServiceInterface.php',
     'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
 );

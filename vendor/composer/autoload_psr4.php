@@ -6,5 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'atlantisgroupbv\\ormmodel\\' => array($baseDir . '/src'),
+    'AtlantisGroupBV\\DataModel\\' => array($baseDir . '/src'),
 );

@@ -1,8 +1,8 @@
 <?php
 
-namespace AtlantisGroupBV\OrmModel\Entity;
+namespace AtlantisGroupBV\DataModel\Entity;
 
-use AtlantisGroupBV\OrmModel;
+use AtlantisGroupBV\DataModel;
 
 interface EntityInterface extends \JsonSerializable
 {

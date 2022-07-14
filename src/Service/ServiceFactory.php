@@ -1,8 +1,8 @@
 <?php
 
-namespace AtlantisGroupBV\OrmModel\Service;
+namespace AtlantisGroupBV\DataModel\Service;
 
-use AtlantisGroupBV\OrmModel\Exception\General;
+use AtlantisGroupBV\DataModel\Exception\General;
 use Psr\Container\ContainerInterface;
 
 class ServiceFactory

@@ -5,6 +5,6 @@ services:
     public: false
 
     AtlantisGroupBV\OrmModel\:
-      resource: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/*'
-      exclude: '%kernel.project_dir%/vendor/atlantisgroupbv/ormmodel/src/Validator/*'
+      resource: '%kernel.project_dir%/vendor/atlantisgroupbv/datamodel/src/*'
+      exclude: '%kernel.project_dir%/vendor/atlantisgroupbv/datamodel/src/Validator/*'
 
