@@ -1,7 +1,7 @@
 {
   "name": "atlantisgroupbv/ormmodel",
   "homepage": "https://github.com/skooijman/ormmodel",
-  "description": "Custom orm with multiple drivers",
+  "description": "Custom orm with multiple drivers, based on and for symfony",
   "keywords": ["DB2Model", "DB2ORM"],
   "license": "MIT",
   "authors": [
