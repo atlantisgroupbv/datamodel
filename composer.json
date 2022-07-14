@@ -28,7 +28,7 @@
     "pdepend/pdepend": "*",
     "phpmd/phpmd": "*",
     "phploc/phploc": "*",
-    "sebstian/phpcpd": "*",
+    "sebastian/phpcpd": "*",
     "phing/phing": "*"
   },
   "autoload": {

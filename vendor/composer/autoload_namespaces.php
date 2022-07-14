@@ -6,4 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Compoment\\Validator\\Constraints\\' => array($baseDir . '/src/Validator/Constraints'),
+    'PHPMD\\' => array($vendorDir . '/phpmd/phpmd/src/main/php'),
 );
