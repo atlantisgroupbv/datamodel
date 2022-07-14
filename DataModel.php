@@ -1,15 +1,15 @@
 <?php
 
-namespace AtlantisGroupBV\OrmModel;
+namespace AtlantisGroupBV\DataModel;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\Translation\Translator;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 
-class OrmModel extends Bundle
+class DataModel extends Bundle
 {
     public function boot()
     {
-        \AtlantisGroupBV\OrmModel\Service\ServiceFactory::setDirContainer($this->container);
+        \AtlantisGroupBV\DataModel\Service\ServiceFactory::setDirContainer($this->container);
     }
 }

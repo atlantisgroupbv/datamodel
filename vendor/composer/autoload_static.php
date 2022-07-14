@@ -7,20 +7,25 @@ namespace Composer\Autoload;
 class ComposerStaticInitfd2243da617b86a60e468b9045e97f89
 {
     public static $prefixLengthsPsr4 = array (
-        'a' => 
+        'A' => 
         array (
-            'atlantisgroupbv\\ormmodel\\' => 25,
+            'AtlantisGroupBV\\DataModel\\' => 26,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'atlantisgroupbv\\ormmodel\\' => 
+        'AtlantisGroupBV\\DataModel\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
     );
 
     public static $classMap = array (
+        'AtlantisGroupBV\\DataModel\\Entity\\EntityInterface' => __DIR__ . '/../..' . '/src/Entity/EntityInterface.php',
+        'AtlantisGroupBV\\DataModel\\Exception\\General' => __DIR__ . '/../..' . '/src/Exception/General.php',
+        'AtlantisGroupBV\\DataModel\\Service\\AbstractService' => __DIR__ . '/../..' . '/src/Service/AbstractService.php',
+        'AtlantisGroupBV\\DataModel\\Service\\ServiceFactory' => __DIR__ . '/../..' . '/src/Service/ServiceFactory.php',
+        'AtlantisGroupBV\\DataModel\\Service\\ServiceInterface' => __DIR__ . '/../..' . '/src/Service/ServiceInterface.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

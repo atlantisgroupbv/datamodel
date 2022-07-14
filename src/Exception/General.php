@@ -1,6 +1,6 @@
 <?php
 
-namespace AtlantisGroupBV\OrmModel\Exception;
+namespace AtlantisGroupBV\DataModel\Exception;
 
 class General extends \Exception
 {

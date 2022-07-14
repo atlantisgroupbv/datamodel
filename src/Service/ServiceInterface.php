@@ -1,8 +1,8 @@
 <?php
 
-namespace AtlantisGroupBV\OrmModel\Service;
+namespace AtlantisGroupBV\DataModel\Service;
 
-use AtlantisGroupBV\OrmModel;
+use AtlantisGroupBV\DataModel;
 
 /**
  * Interface ServiceInterface
