@@ -1,6 +1,6 @@
 {
   "name": "atlantisgroupbv/ormmodel",
-  "homepage": "https://github.com/skooijman/ormmodel",
+  "homepage": "https://github.com/atlantisgroupbv/ormmodel",
   "description": "Custom orm with multiple drivers, based on and for symfony",
   "keywords": ["DB2Model", "DB2ORM"],
   "license": "MIT",
@@ -14,9 +14,12 @@
   "require": {
     "php": ">=8.1"
   },
+  "config": {
+    "optimize-autoloader": true
+  },
   "autoload": {
     "psr-4": {
-      "atlantisgroupbv\\ormmodel\\": "src/"
+      "AtlantisGroupBV\\OrmModel\\": "src/"
     }
   }
 }
